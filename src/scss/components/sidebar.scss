@@ -1,0 +1,46 @@
+/*  Боковое меню на странице компонента */
+.sidebar {
+  width: calc(229px + 56px); // menu + gap
+  background-color: var(--page-component-bg);
+  display: none;
+  @media (min-width: 768px) {
+    display: block;
+  }
+
+  &__title {
+    margin-bottom: 16px;
+  }
+
+  &__title,
+  &__link {
+    font-family: var(--ff-secondary);
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 26px;
+    color: var(--component-menu-header);
+  }
+
+  &__link {
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--alternate-text);
+    cursor: pointer;
+  }
+
+  &__item {
+    margin-bottom: 4px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &:not(&_active):hover > .sidebar__link {
+      color: var(--component-menu-hover);
+    }
+
+    &_active > .sidebar__link {
+      color: var(--notification);
+      cursor: default;
+    }
+  }
+}

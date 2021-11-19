@@ -1,0 +1,139 @@
+.mob-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  visibility: hidden;
+  opacity: 0;
+  background-color: var(--mob-menu-parent-bg);
+  pointer-events: none;
+  transform: translateX(-100vw);
+  transition: all 0.3s ease-in-out;
+  z-index: 1;
+
+  &[data-open] {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+  }
+
+  &__window {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    max-width: var(--mob-menu-width);
+    background-color: var(--mob-menu-bg);
+    overflow: auto;
+  }
+
+  &__open {
+    border: none;
+    background-color: var(--mob-menu-bg);
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    margin-top: 16px;
+    margin-left: 4px;
+  }
+
+  &__close {
+    border: none;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  &__header {
+    display: flex;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    position: relative;
+  }
+
+  &__icon-logo {
+    width: 110px;
+    height: 32px;
+    margin: 0 auto;
+    color: var(--logo-color);
+  }
+
+  &__icon-close {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 12px;
+    width: 32px;
+    height: 32px;
+    color: var(--mob-menu-close-icon);
+    fill: var(--mob-menu-close-icon-bg);
+  }
+
+  &__divider {
+    border-bottom: 1px solid var(--divider-color);
+  }
+
+  &__control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  &__mode,
+  &__title,
+  &__link {
+    font-family: var(--ff-secondary);
+    font-style: normal;
+    font-weight: normal;
+  }
+
+  &__mode {
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--label-dark-switch-color);
+  }
+
+  &__title {
+    display: block;
+    font-size: 20px;
+    line-height: 26px;
+    color: var(--mob-menu-title);
+    padding-top: 24px;
+    padding-bottom: 16px;
+  }
+
+  &__item {
+    margin-bottom: 16px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__link {
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--mob-menu-link);
+    text-decoration: none;
+
+    &:not(:active):not(.mob-menu__link_active):hover {
+      color: var(--mob-menu-link-hover);
+    }
+
+    &:active,
+    &_active {
+      color: var(--notification);
+      cursor: default;
+    }
+  }
+
+  &__nav {
+    padding-bottom: 32px;
+  }
+}

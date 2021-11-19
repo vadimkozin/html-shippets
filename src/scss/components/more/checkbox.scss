@@ -1,0 +1,88 @@
+.checkbox {
+  display: inline-block;
+
+  &__input {
+    position: absolute;
+    opacity: 0;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    z-index: -1;
+    pointer-events: none;
+    cursor: default;
+  }
+
+  &__state {
+    display: flex;
+    align-items: center;
+  }
+
+  &__label {
+    font-family: var(--ff-secondary);
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--label-color);
+    margin-left: 12px;
+  }
+
+  &__control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 28px;
+    height: 28px;
+    // background-color: var(--main-bg);
+    border: 1px solid var(--border-input-color);
+    border-radius: 4px;
+    box-sizing: border-box;
+    position: relative;
+  }
+
+  &__icon {
+    display: none;
+    width: 22px;
+    height: 22px;
+    color: var(--main-bg);
+  }
+
+  &__input {
+    /* чекбокс в состоянии hover */
+    &:not(:disabled):hover ~ .checkbox__state {
+      cursor: pointer;
+    }
+    /* чекбокс в состоянии checked - фон и бордер */
+    &:checked ~ .checkbox__state .checkbox__control {
+      background-color: var(--primary);
+      border-color: var(--primary);
+      animation: splash 0.5s ease-out;
+    }
+    /* чекбокс в состоянии checked - галочка */
+    &:checked ~ .checkbox__state .checkbox__icon {
+      display: block;
+    }
+    /* чекбокс в фокусе */
+    &:focus ~ .checkbox__state .checkbox__label {
+      text-decoration: underline;
+    }
+    /* чекбокс в состоянии disabled - label */
+    &:disabled ~ .checkbox__state .checkbox__label {
+      color: var(--checkbox-input);
+    }
+    /* чекбокс в состоянии disabled - сам чекбокс */
+    &:disabled ~ .checkbox__state .checkbox__control {
+      background-color: var(--checkbox-input);
+    }
+    /* outline вокруг checkbox */
+    &:focus ~ .checkbox__state .checkbox__control {
+      /* Виден в полноцветном пространстве */
+      box-shadow: 0px 0px 3px 3px var(--outline-color);
+      /* Отображается в высококонтрастных темах Windows */
+      outline-color: transparent;
+      outline-width: 2px;
+      outline-style: dotted;
+    }
+  }
+}

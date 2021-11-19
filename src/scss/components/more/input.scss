@@ -1,0 +1,90 @@
+.input {
+  display: flex;
+  flex-direction: column;
+
+  &__label,
+  &__status {
+    font-family: var(--ff-secondary);
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--input-label);
+  }
+
+  &__status {
+    font-weight: 400;
+    font-size: 8px;
+    line-height: 14px;
+  }
+
+  &__block {
+    display: flex;
+    position: relative;
+  }
+
+  &__control {
+    width: 200px;
+    padding: 16px 54px 14px 26px;
+    background: var(--main-bg);
+    border: 1px solid var(--border-input-color);
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-family: var(--ff-secondary);
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 26px;
+    color: var(--input-control);
+
+    @media (min-width: 281px) {
+      width: 240px;
+    }
+
+    @media (min-width: 321px) {
+      width: 290px;
+    }
+
+    @media (min-width: 376px) {
+      width: 351px;
+    }
+
+    &::placeholder {
+      color: var(--input-placeholder);
+    }
+  }
+
+  &:not(&_success) > &__block &__control:focus,
+  &:not(&_invalid) > &__block &__control:focus {
+    border: 1px solid var(--primary);
+    box-shadow: var(--box-shadow-input-focus);
+    outline: none;
+  }
+
+  &__icon {
+    position: absolute;
+    top: 17px;
+    right: 18px;
+    width: 24px;
+    height: 24px;
+  }
+
+  &_success > &__status,
+  &_success > &__block &__icon {
+    color: var(--success);
+  }
+
+  &_invalid > &__status,
+  &_invalid > &__block &__icon {
+    color: var(--error);
+  }
+
+  &_success > &__block &__control {
+    box-shadow: var(--box-shadow-input-success);
+    border-color: var(--success);
+  }
+  &_invalid > &__block &__control {
+    box-shadow: var(--box-shadow-input-error);
+    border-color: var(--error);
+  }
+}

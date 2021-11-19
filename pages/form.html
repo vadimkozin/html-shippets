@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Form Elements</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
+  <link rel="stylesheet" href="../dist/styles.css">
+  <style>
+    .groups {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+    .group {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      width: 100%;
+      gap: 10px;
+    }
+    .group__item {
+      flex: 1 1 150px;
+	    align-self: auto;
+      width: 100px;
+      min-height: 100px;
+      height: fit-content;
+    }
+    .group__item {
+      margin-top: 24px;
+    }
+    .group_divider {
+      width: 100%;
+      border: none;
+      border-bottom: 1px dotted var(--grey-2);
+      margin-top: 16px;
+      margin-bottom: 24px;
+    }
+    .radio-wrapper, 
+    .checkbox-wrapper, 
+    .toggler-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .radio-wrapper > * + *,
+    .checkbox-wrapper > * + *,
+    .toggler-wrapper > * + * {
+      margin-top: 12px;
+    }
+
+    .input-wrapper {
+      display: flex;
+      flex-flow: row wrap;
+      gap: 8px;
+    }
+
+    .button-wrapper {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    @media (min-width: 400px) {
+      .button-wrapper {
+        grid-template-columns: repeat(3, auto);
+        grid-template-rows: repeat(2, auto);
+        grid-auto-flow: column;
+      }
+    }
+
+    .accordion-wrapper {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .accordion-wrapper__item {
+      margin-bottom: 8px;
+    }
+    
+    .accordion-wrapper__item:last-child {
+      margin-bottom: 0;
+    }
+  </style>
+
+</head>
+<body>
+  <h1 class="available-hidden">Reusable component library sources</h1>
+  <div class="page page_component">
+    <header class="page__header page__box">
+      <div class="header header_grey header__top-panel">
+        <button id="mob-menu-open" class="header__mob-menu-open">
+          <svg class="header__mob-menu-open-icon">
+            <use xlink:href="../src/images/sprite.svg#menu"></use>
+          </svg>
+        </button>
+        <!-- Mobile menu - start -->
+        <div id="mob-menu" class="mob-menu">
+          <div class="mob-menu__window">
+            <div class="mob-menu__header x-p12">
+              <button id="mob-menu-close" class="mob-menu__close">
+                <svg class="mob-menu__icon-close">
+                  <use xlink:href="../src/images/sprite.svg#menu-close"></use>
+                </svg>
+              </button>
+              <svg class="mob-menu__icon-logo">
+                <use xlink:href="../src/images/sprite.svg#logo"></use>
+              </svg>
+            </div>
+            <div class="mob-menu__divider x-m12 x-mt16"></div>
+            <nav class="mob-menu__nav x-p12">
+              <div class="mob-menu__control">
+                <span class="mob-menu__mode">Dark mode</span>
+                <label class="toggler" id="toggler-schema-modal">
+                  <input class="toggler__input" type="checkbox" name="toggler" value="1">
+                  <p class="toggler__label"></p>
+              </label>
+              </div>
+              <div class="mob-menu__divider"></div>
+              <h4 class="mob-menu__title">Components</h4>
+              <ul>
+                <li class="mob-menu__item"><a class="mob-menu__link" href="./modal.html">Modal</a></li>
+                <li class="mob-menu__item"><a class="mob-menu__link" href="./tooltip.html">Tooltip</a></li>
+                <li class="mob-menu__item"><a class="mob-menu__link" href="./avatar.html">Avatar</a></li>
+                <li class="mob-menu__item"><a class="mob-menu__link" href="./calendar.html">Calendar</a></li>
+                <li class="mob-menu__item"><a class="mob-menu__link" href="./histogram.html">Histogram</a></li>
+                <li class="mob-menu__item"><a class="mob-menu__link mob-menu__link_active">Custom form elements</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+          <!-- <div class="mob-menu__context-background"></div>
+        </section>  -->
+        <!-- Mobile menu - end -->
+        <a class="header__link-main" href="/">
+          <svg class="header__logo" width="110" height="32">
+            <use href="../src/images/sprite.svg#logo"></use>
+          </svg>
+        </a>
+        <div class="header__nav">
+            <div class="nav">
+                <ul class="menu menu_top">
+                    <li class="menu__item menu__item_active">Components</li>
+                    <li class="menu__item">About</li>
+                    <li class="menu__item">Contact</li>
+                </ul>
+                <div class="nav__controls">
+                  <svg id="sun" class="nav__controls-item" width="24" height="24">
+                    <use href="../src/images/sprite.svg#sun"></use>
+                  </svg>
+                  <label class="nav__controls-item toggler" id="toggler-schema">
+                    <input class="toggler__input" type="checkbox" name="toggler" value="1">
+                    <p class="toggler__label"></p>
+                  </label>
+                  <svg id="moon" class="nav__controls-item" width="24" height="24">
+                    <use href="../src/images/sprite.svg#moon"></use>
+                  </svg>
+              </div>
+            </div>
+        </div>
+      </div>
+    </header>
+    <main class="page__main page__box">
+      <aside class="sidebar">
+        <h3 class="sidebar__title">Components</h3>
+        <nav>
+          <ul>
+            <li class="sidebar__item"><a class="sidebar__link" href="./modal.html">Modal</a></li>
+            <li class="sidebar__item"><a class="sidebar__link" href="./tooltip.html">Tooltip</a></li>
+            <li class="sidebar__item"><a class="sidebar__link" href="./avatar.html">Avatar</a></li>
+            <li class="sidebar__item"><a class="sidebar__link" href="./calendar.html">Calendar</a></li>
+            <li class="sidebar__item"><a class="sidebar__link" href="./histogram.html">Histogram</a></li>
+            <li class="sidebar__item sidebar__item_active"><a class="sidebar__link">Custom form elements</a></li>
+          </ul>
+        </nav>
+      </aside>
+      <section class="component">
+        <h2 class="component__title">Custom form elements</h2>
+        <section class="component__wrapper">
+          <!---->
+          <div class="groups">
+            <div class="group">
+              <div class="group__item"> <!-- radio -->
+                <div class="radio-wrapper">
+                  <label class="radio">
+                    <input class="radio__input" type="radio" name="radio" value="1">
+                    <span class="radio__label">Default</span>
+                  </label>
+                
+                  <label class="radio">
+                    <input class="radio__input" type="radio" name="radio" value="2" checked>
+                    <span class="radio__label">Selected</span>
+                  </label>
+                
+                  <label class="radio">
+                    <input class="radio__input" type="radio" name="radio" value="3" disabled>
+                    <span class="radio__label">Disabled</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="group__item"> <!-- checkbox -->
+                <div class="checkbox-wrapper">
+                    <label class="checkbox">
+                        <input class="checkbox__input" type="checkbox" name="checkbox-set" value="1">
+                        <div class="checkbox__state">
+                            <div class="checkbox__control">
+                                <svg class="checkbox__icon">
+                                    <use xlink:href="../src/images/sprite.svg#check"></use>
+                                </svg>  
+                            </div>
+                            <div class="checkbox__label">
+                                Default
+                            </div>
+                        </div>
+                    </label>
+                
+                    <label class="checkbox">
+                        <input class="checkbox__input" type="checkbox" name="checkbox-set" value="2" checked>
+                        <div class="checkbox__state">
+                            <div class="checkbox__control">
+                                <svg class="checkbox__icon">
+                                    <use xlink:href="../src/images/sprite.svg#check"></use>
+                                </svg>  
+                            </div>
+                            <div class="checkbox__label">
+                                Checkbox
+                            </div>
+                        </div>
+                    </label>
+                
+                    <label class="checkbox">
+                        <input class="checkbox__input" type="checkbox" name="checkbox-set" value="3" disabled>
+                        <div class="checkbox__state">
+                            <div class="checkbox__control">
+                                <svg class="checkbox__icon">
+                                    <use xlink:href="../src/images/sprite.svg#check"></use>
+                                </svg>  
+                            </div>
+                            <div class="checkbox__label">
+                                Disabled
+                            </div>
+                        </div>
+                    </label>
+                </div>
+              </div>
+
+              <div class="group__item"> <!-- toggler -->
+                <div class="toggler-wrapper">
+                  <label class="toggler">
+                    <input class="toggler__input available-hidden" type="checkbox" name="toggler" value="1">
+                    <p class="toggler__label"><span class="toggler__label-text">Off</span></p>
+                  </label>
+                
+                  <label class="toggler">
+                    <input class="toggler__input available-hidden" type="checkbox" name="toggler" value="2" checked>
+                    <p class="toggler__label"><span class="toggler__label-text">On</span></p>
+                  </label>
+                
+                  <label class="toggler">
+                    <input class="toggler__input available-hidden" type="checkbox" name="toggler" value="3" disabled>
+                    <p class="toggler__label"><span class="toggler__label-text">Disabled</span></p>
+                  </label>
+                </div>
+              </div>
+            </div>
+            
+            <div class="group_divider"></div>
+
+            <div class="group"> <!-- input -->
+              <div class="input-wrapper">
+                <label class="input">
+                    <span class="input__label">Label</span>
+                    <input class="input__control" type="text" placeholder="Placeholder">
+                    <span class="input__status">Some status</span>
+                </label>
+                <label class="input input_success">
+                    <span class="input__label">Success</span>
+                    <div class="input__block">
+                    <input class="input__control" type="text" placeholder="Placeholder" value="Success">
+                        <svg class="input__icon">
+                            <use xlink:href="../src/images/sprite.svg#success"></use>
+                        </svg>
+                    </div>
+                    <span class="input__status">Some status</span>
+                </label>
+                <label class="input input_invalid">
+                    <span class="input__label">Error</span>
+                    <div class="input__block">
+                        <input class="input__control" type="text" placeholder="Placeholder" value="Error">
+                        <svg class="input__icon">
+                            <use xlink:href="../src/images/sprite.svg#error"></use>
+                        </svg>
+                    </div>
+                    <span class="input__status">Some status</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="group_divider"></div>
+
+            <div class="button-wrapper"> <!-- button -->
+              <button class="button button_primary">Primary</button>
+              <button class="button button_primary" disabled>Primary disabled</button>
+            
+              <button class="button button_secondary">Secondary</button>
+              <button class="button button_secondary" disabled>Secondary disabled</button>
+            
+              <button class="button button_alternate">Alternate</button>
+              <button class="button button_alternate" disabled>Alternate disabled</button>
+            </div>
+
+            <div class="group_divider"></div>
+
+            <div class="group"> <!-- accordion -->
+              <div class="accordion-wrapper">
+                <details class="accordion accordion-wrapper__item" open>
+                  <summary class="accordion__summary">
+                    <span class="accordion__title">Accordion item 1</span>
+                    <svg class="accordion__icon" width="24" height="24">
+                      <use xlink:href="../src/images/sprite.svg#arrow-down"></use>
+                    </svg>
+                  </summary>
+                  <p class="accordion__text">
+                    Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+                  </p>
+                </details>
+                
+                <details class="accordion accordion-wrapper__item">
+                    <summary class="accordion__summary">
+                      <span class="accordion__title">Accordion item 2</span>
+                      <svg class="accordion__icon" width="24" height="24">
+                        <use xlink:href="../src/images/sprite.svg#arrow-down"></use>
+                      </svg>
+                    </summary>
+                    <p class="accordion__text">
+                        Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+                    </p>
+                </details>
+                
+                <details class="accordion accordion-wrapper__item">
+                    <summary class="accordion__summary">
+                      <span class="accordion__title">Accordion item 3</span>
+                      <svg class="accordion__icon" width="24" height="24">
+                        <use xlink:href="../src/images/sprite.svg#arrow-down"></use>
+                      </svg>
+                    </summary>
+                    <p class="accordion__text">
+                        Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+                    </p>
+                </details>
+              </div>
+            </div>
+          </div>
+          <!---->
+        </section>
+        <section class="tabs tabs_white">
+          <input class="tabs__input" type="radio" name="tabs-nav" id="#tab1" checked>
+          <input class="tabs__input" type="radio" name="tabs-nav" id="#tab2">
+          <div class="tabs__scroller">
+            <label class="tabs__label" for="#tab1">HTML</label>
+            <label class="tabs__label" for="#tab2">CSS</label>
+          </div>
+          <div class="tabs__content tabs__content_1 tabs__content_p0">
+            <pre class="tabs__code">
+              <code>
+<!-- radio -->
+&lt;!--radio --&gt;
+&lt;div class=&quot;wrapper&quot;&gt;
+&lt;label class=&quot;radio&quot;&gt;
+&lt;input class=&quot;radio__input&quot; type=&quot;radio&quot; name=&quot;radio&quot; value=&quot;1&quot;&gt;
+&lt;span class=&quot;radio__label&quot;&gt;Default&lt;/span&gt;
+&lt;/label&gt;
+
+&lt;label class=&quot;radio&quot;&gt;
+&lt;input class=&quot;radio__input&quot; type=&quot;radio&quot; name=&quot;radio&quot; value=&quot;2&quot; checked&gt;
+&lt;span class=&quot;radio__label&quot;&gt;Selected&lt;/span&gt;
+&lt;/label&gt;
+
+&lt;label class=&quot;radio&quot;&gt;
+&lt;input class=&quot;radio__input&quot; type=&quot;radio&quot; name=&quot;radio&quot; value=&quot;3&quot; disabled&gt;
+&lt;span class=&quot;radio__label&quot;&gt;Disabled&lt;/span&gt;
+&lt;/label&gt;
+&lt;/div&gt;
+
+<!-- checkbox -->
+&lt;!--checkbox --&gt;
+&lt;div class=&quot;wrapper&quot;&gt;
+&lt;label class=&quot;checkbox&quot;&gt;
+    &lt;input class=&quot;checkbox__input&quot; type=&quot;checkbox&quot; name=&quot;checkbox-set&quot; value=&quot;1&quot;&gt;
+    &lt;div class=&quot;checkbox__state&quot;&gt;
+        &lt;div class=&quot;checkbox__control&quot;&gt;
+            &lt;svg class=&quot;checkbox__icon&quot;&gt;
+                &lt;use xlink:href=&quot;../../assets/images/sprite.svg#check&quot;&gt;&lt;/use&gt;
+            &lt;/svg&gt;  
+        &lt;/div&gt;
+        &lt;div class=&quot;checkbox__label&quot;&gt;
+            Default
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/label&gt;
+
+&lt;label class=&quot;checkbox&quot;&gt;
+    &lt;input class=&quot;checkbox__input&quot; type=&quot;checkbox&quot; name=&quot;checkbox-set&quot; value=&quot;2&quot;&gt;
+    &lt;div class=&quot;checkbox__state&quot;&gt;
+        &lt;div class=&quot;checkbox__control&quot;&gt;
+            &lt;svg class=&quot;checkbox__icon&quot;&gt;
+                &lt;use xlink:href=&quot;../../assets/images/sprite.svg#check&quot;&gt;&lt;/use&gt;
+            &lt;/svg&gt;  
+        &lt;/div&gt;
+        &lt;div class=&quot;checkbox__label&quot;&gt;
+            Checkbox
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/label&gt;
+
+&lt;label class=&quot;checkbox&quot;&gt;
+    &lt;input class=&quot;checkbox__input&quot; type=&quot;checkbox&quot; name=&quot;checkbox-set&quot; value=&quot;3&quot; disabled&gt;
+    &lt;div class=&quot;checkbox__state&quot;&gt;
+        &lt;div class=&quot;checkbox__control&quot;&gt;
+            &lt;svg class=&quot;checkbox__icon&quot;&gt;
+                &lt;use xlink:href=&quot;../../assets/images/sprite.svg#check&quot;&gt;&lt;/use&gt;
+            &lt;/svg&gt;  
+        &lt;/div&gt;
+        &lt;div class=&quot;checkbox__label&quot;&gt;
+            Disabled
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/label&gt;
+&lt;/div&gt;
+
+<!-- toggler -->
+&lt;!--toggler --&gt;
+&lt;div class=&quot;wrapper&quot;&gt;
+
+&lt;label class=&quot;toggler&quot;&gt;
+&lt;input class=&quot;toggler__input available-hidden&quot; type=&quot;checkbox&quot; name=&quot;toggler&quot; value=&quot;1&quot;&gt;
+&lt;span class=&quot;toggler__label&quot;&gt;Off&lt;/span&gt;
+&lt;/label&gt;
+
+&lt;label class=&quot;toggler&quot;&gt;
+&lt;input class=&quot;toggler__input available-hidden&quot; type=&quot;checkbox&quot; name=&quot;toggler&quot; value=&quot;2&quot; checked&gt;
+&lt;span class=&quot;toggler__label&quot;&gt;On&lt;/span&gt;
+&lt;/label&gt;
+
+&lt;label class=&quot;toggler&quot;&gt;
+&lt;input class=&quot;toggler__input available-hidden&quot; type=&quot;checkbox&quot; name=&quot;toggler&quot; value=&quot;3&quot; disabled&gt;
+&lt;span class=&quot;toggler__label&quot;&gt;Disabled&lt;/span&gt;
+&lt;/label&gt;
+
+&lt;/div&gt;
+
+<!-- input -->
+&lt;!--input --&gt;
+&lt;div class=&quot;wrapper&quot;&gt;
+&lt;label class=&quot;input&quot;&gt;
+    &lt;span class=&quot;input__label&quot;&gt;Label&lt;/span&gt;
+    &lt;input class=&quot;input__control&quot; type=&quot;text&quot; placeholder=&quot;Placeholder&quot;&gt;
+    &lt;span class=&quot;input__status&quot;&gt;Some status&lt;/span&gt;
+&lt;/label&gt;
+&lt;label class=&quot;input input_success&quot;&gt;
+    &lt;span class=&quot;input__label&quot;&gt;Success&lt;/span&gt;
+    &lt;div class=&quot;input__block&quot;&gt;
+    &lt;input class=&quot;input__control&quot; type=&quot;text&quot; placeholder=&quot;Placeholder&quot; value=&quot;Success&quot;&gt;
+        &lt;svg class=&quot;input__icon&quot;&gt;
+            &lt;use xlink:href=&quot;../../assets/images/sprite.svg#success&quot;&gt;&lt;/use&gt;
+        &lt;/svg&gt;
+    &lt;/div&gt;
+    &lt;span class=&quot;input__status&quot;&gt;Some status&lt;/span&gt;
+&lt;/label&gt;
+&lt;label class=&quot;input input_invalid&quot;&gt;
+    &lt;span class=&quot;input__label&quot;&gt;Error&lt;/span&gt;
+    &lt;div class=&quot;input__block&quot;&gt;
+        &lt;input class=&quot;input__control&quot; type=&quot;text&quot; placeholder=&quot;Placeholder&quot; value=&quot;Error&quot;&gt;
+        &lt;svg class=&quot;input__icon&quot;&gt;
+            &lt;use xlink:href=&quot;../../assets/images/sprite.svg#error&quot;&gt;&lt;/use&gt;
+        &lt;/svg&gt;
+    &lt;/div&gt;
+    &lt;span class=&quot;input__status&quot;&gt;Some status&lt;/span&gt;
+&lt;/label&gt;
+&lt;/div&gt;
+
+
+<!-- button -->
+&lt;!--button --&gt;
+&lt;div class=&quot;wrapper&quot;&gt;
+&lt;button class=&quot;button button_primary&quot;&gt;Primary&lt;/button&gt;
+&lt;button class=&quot;button button_primary&quot; disabled&gt;Primary disabled&lt;/button&gt;
+
+&lt;button class=&quot;button button_secondary&quot;&gt;Secondary&lt;/button&gt;
+&lt;button class=&quot;button button_secondary&quot; disabled&gt;Secondary disabled&lt;/button&gt;
+
+&lt;button class=&quot;button button_alternate&quot;&gt;Alternate&lt;/button&gt;
+&lt;button class=&quot;button button_alternate&quot; disabled&gt;Alternate disabled&lt;/button&gt;
+&lt;/div&gt;
+
+<!-- accordion-->
+&lt;!--accordion --&gt;
+&lt;div class=&quot;accordion-wrapper&quot;&gt;
+  &lt;details class=&quot;accordion accordion-wrapper__item&quot; open&gt;
+    &lt;summary class=&quot;accordion__summary&quot;&gt;
+      &lt;span class=&quot;accordion__title&quot;&gt;Accordion item 1&lt;/span&gt;
+      &lt;svg class=&quot;accordion__icon&quot; width=&quot;24&quot; height=&quot;24&quot;&gt;
+        &lt;use xlink:href=&quot;../src/images/sprite.svg#arrow-down&quot;&gt;&lt;/use&gt;
+      &lt;/svg&gt;
+    &lt;/summary&gt;
+    &lt;p class=&quot;accordion__text&quot;&gt;
+      Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+    &lt;/p&gt;
+  &lt;/details&gt;
+  
+  &lt;details class=&quot;accordion accordion-wrapper__item&quot;&gt;
+      &lt;summary class=&quot;accordion__summary&quot;&gt;
+        &lt;span class=&quot;accordion__title&quot;&gt;Accordion item 2&lt;/span&gt;
+        &lt;svg class=&quot;accordion__icon&quot; width=&quot;24&quot; height=&quot;24&quot;&gt;
+          &lt;use xlink:href=&quot;../src/images/sprite.svg#arrow-down&quot;&gt;&lt;/use&gt;
+        &lt;/svg&gt;
+      &lt;/summary&gt;
+      &lt;p class=&quot;accordion__text&quot;&gt;
+          Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+      &lt;/p&gt;
+  &lt;/details&gt;
+  
+  &lt;details class=&quot;accordion accordion-wrapper__item&quot;&gt;
+      &lt;summary class=&quot;accordion__summary&quot;&gt;
+        &lt;span class=&quot;accordion__title&quot;&gt;Accordion item 3&lt;/span&gt;
+        &lt;svg class=&quot;accordion__icon&quot; width=&quot;24&quot; height=&quot;24&quot;&gt;
+          &lt;use xlink:href=&quot;../src/images/sprite.svg#arrow-down&quot;&gt;&lt;/use&gt;
+        &lt;/svg&gt;
+      &lt;/summary&gt;
+      &lt;p class=&quot;accordion__text&quot;&gt;
+          Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+      &lt;/p&gt;
+  &lt;/details&gt;
+&lt;/div&gt;
+<!-- -->
+              </code>
+            </pre>
+          </div>
+          <div class="tabs__content tabs__content_2 tabs__content_p0">
+            <pre class="tabs__code">
+              <code>
+/* radio */
+.radio {
+line-height: 0;
+position: relative;
+}
+
+.radio__input {
+position: absolute;
+opacity: 0;
+clip: rect(0 0 0 0);
+width: 1px;
+height: 1px;
+margin: -1px;
+z-index: -1;
+}
+
+.radio__label {
+display: inline-flex;
+align-items: center;
+user-select: none;
+
+font-family: var(--ff-secondary);
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 24px;
+color: var(--grey-4);
+}
+
+/* состояние радиокнопки по умолчанию (default) */
+.radio__label::before {
+content: '';
+display: inline-block;
+width: 28px;
+height: 28px;
+flex-shrink: 0;
+flex-grow: 0;
+border: 1px solid var(--grey-2);
+border-radius: 50%;
+margin-right: 12px;
+box-sizing: border-box;
+}
+
+/* наведении курсора */
+.radio__input:not(:disabled):not(.radio_disabled):not(:checked) + .radio__label:hover {
+cursor: pointer;
+}
+.radio__input:not(:disabled):not(.radio_disabled):not(:checked) + .radio__label:hover::before {
+border-color: var(--grey-3);
+}
+
+/* активная радиокнопка, при нажатии */
+.radio__input:not(:disabled):not(.radio_disabled):active + .radio__label::before {
+background-color: var(--grey-1);
+}
+
+/* надпись радиокнопки в фокусе */
+.radio__input:not(:disabled):not(.radio_disabled):focus + .radio__label {
+text-decoration: underline;
+}
+
+/* радиокновка выбрана (checked) - внешняя часть */
+.radio__input:not(:disabled):not(.radio_disabled):checked + .radio__label::before {
+background-color: var(--white);
+border: 2px solid var(--blue);
+}
+
+/* радиокновка выбрана (checked) - внутренняя часть */
+.radio__input:not(:disabled):not(.radio_disabled):checked + .radio__label::after {
+position: absolute;
+content: '';
+left: 5px;
+width: 18px;
+height: 18px;
+border-radius: 50%;
+background: var(--blue);
+}
+
+/* радиокнопка в состоянии disabled */
+.radio__input.radio_disabled+ .radio__label::before,
+.radio__input:disabled + .radio__label::before {
+background-color: var(--grey-2);
+}
+
+/* надпись радиокнопки в состоянии disabled */
+.radio__input.radio_disabled + .radio__label,
+.radio__input:disabled + .radio__label {
+color: var(--grey-2);
+}
+
+/* checkbox */
+.checkbox {
+display: inline-block;
+}
+
+.checkbox__input {
+position: absolute;
+opacity: 0;
+clip: rect(0 0 0 0);
+width: 1px;
+height: 1px;
+margin: -1px;
+z-index: -1;
+pointer-events: none;
+cursor: default;
+}
+
+.checkbox__state {
+display: flex;
+align-items: center;
+}
+
+.checkbox__label {
+font-family: var(--ff-secondary);
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 24px;
+color: var(--label-color);
+margin-left: 12px;
+}
+
+.checkbox__control {
+display: flex;
+justify-content: center;
+align-items: center;
+width: 28px;
+height: 28px;
+background-color: var(--main-bg);  
+border: 1px solid var(--border-input-color);
+border-radius: 4px;
+box-sizing: border-box;
+position: relative;
+}
+
+.checkbox__icon {
+display: none;
+width: 22px;
+height: 22px;
+color: var(--main-bg);
+}
+
+/* чекбокс в состоянии hover */
+.checkbox__input:not(:disabled):hover ~ .checkbox__state  {
+cursor: pointer;
+}
+
+/* чекбокс в состоянии checked - фон и бордер */
+.checkbox__input:checked ~ .checkbox__state .checkbox__control {
+background-color: var(--primary);
+border-color: var(--primary);
+}
+
+/* чекбокс в состоянии checked - галочка */
+.checkbox__input:checked ~ .checkbox__state .checkbox__icon {
+display: block;
+}
+
+/* чекбокс в фокусе */
+.checkbox__input:focus ~ .checkbox__state .checkbox__label {
+text-decoration: underline;
+}
+
+/* чекбокс в состоянии disabled - label */
+.checkbox__input:disabled ~ .checkbox__state .checkbox__label {
+color: var(--grey-2);
+}
+/* чекбокс в состоянии disabled - сам чекбокс */
+.checkbox__input:disabled ~ .checkbox__state .checkbox__control {
+background-color: var(--grey-2);
+}
+
+/* outline вокруг checkbox */
+.checkbox__input:focus ~ .checkbox__state .checkbox__control {
+/* Виден в полноцветном пространстве */
+box-shadow: 0px 0px 5px 5px var(--outline-color);
+/* Отображается в высококонтрастных темах Windows */
+outline-color: transparent;
+outline-width: 2px;
+outline-style: dotted;
+}
+
+/* toggler */
+.toggler {
+display: inline-block;
+line-height: 0;
+position: relative;
+}
+
+.toggler__input {
+position: absolute;
+opacity: 0;
+clip: rect(0 0 0 0);
+width: 1px;
+height: 1px;
+margin: -1px;
+z-index: -1;
+pointer-events: none;
+cursor: default;
+}
+
+.toggler__label {
+display: inline-flex;
+align-items: center;
+user-select: none;
+
+font-family: var(--ff-secondary);
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 24px;
+color: var(--grey-4);
+}
+
+/* состояние toggler по умолчанию (default) - окантовка */
+.toggler__label::before {
+content: '';
+display: inline-block;
+width: 52px;
+height: 28px;
+margin-right: 12px;
+
+flex-shrink: 0;
+flex-grow: 0;
+background: var(--white);
+border: 1px solid var(--grey-2);
+border-radius: 16px;
+box-sizing: border-box;
+}
+
+/* состояние toggler по умолчанию (default) - сердцевина */
+.toggler__label::after {
+position: absolute;
+content: '';
+top: calc(50% - 24px/2);
+left: 3px;
+width: 24px;
+height: 24px;
+border-radius: 16px;
+background: var(--grey-2);
+}
+
+/* toggler в состоянии hover */
+.toggler__input:not(:disabled):hover + .toggler__label {
+cursor: pointer;
+}
+
+/* toggler в состоянии checked - фон и бордер */
+.toggler__input:checked + .toggler__label::before {
+background-color: var(--primary);
+border-color: var(--primary);
+}
+
+/* toggler в состоянии checked - сердцевина */
+.toggler__input:checked + .toggler__label::after {
+left: 26px;
+background-color: var(--white);
+}
+
+/* toggler в состоянии focus */
+.toggler__input:focus + .toggler__label {
+text-decoration: underline;
+}
+
+/* toggler в состоянии disabled - подпись */
+.toggler__input:disabled + .toggler__label {
+color: var(--grey-2);
+}
+
+/* toggler в состоянии disabled - фон */
+.toggler__input:disabled + .toggler__label::before {
+background-color: var(--grey-2);
+}
+
+/* toggler в состоянии disabled - сердцевина */
+.toggler__input:disabled + .toggler__label::after {
+background-color: var(--grey-3);
+}
+
+/* input */
+.input {
+display: flex;
+flex-direction: column;
+/* Ранее вносил изменения в index.css, но это еще в ПР, поэтому пока здесь пишу CSS-свойства */
+/* потом перенесу всё в index.css */
+--box-shadow-input-focus: 0px 1px 1px rgba(51, 154, 240, 0.1);
+--box-shadow-input-error: 0px 1px 1px rgba(240, 61, 62, 0.1);
+}
+
+.input__label, .input__status {
+font-family: var(--ff-secondary);
+font-weight: 500;
+font-size: 12px;
+line-height: 18px;
+letter-spacing: 0.04em;
+text-transform: uppercase;
+color: var(--grey-3);
+}
+
+.input__status {
+font-weight: 400;
+font-size: 8px;
+line-height: 14px;
+}
+
+.input__block {
+display: flex;
+position: relative;
+}
+
+.input__control {
+width: 350px;
+padding: 16px 54px 14px 26px;
+background: var(--white);
+border: 1px solid var(--grey-2);
+border-radius: 8px;
+box-sizing: border-box;
+
+font-family: var(--ff-secondary);
+font-weight: normal;
+font-size: 20px;
+line-height: 26px;
+color: var(--grey-4);
+}
+
+.input__control::placeholder {
+color: var(--grey-2);
+}
+
+.input:not(.input_success) > .input__block .input__control:focus,
+.input:not(.input_invalid) > .input__block .input__control:focus {
+border: 1px solid var(--primary);
+box-shadow: var(--box-shadow-input-focus);
+outline: none;
+}
+
+.input__icon {
+position: absolute;
+top: 17px;
+right: 18px;
+width: 24px;
+height: 24px;
+}
+
+.input_success > .input__status,
+.input_success > .input__block .input__icon {
+color: var(--success);
+}
+
+.input_invalid > .input__status,
+.input_invalid > .input__block .input__icon {
+color: var(--error);
+}
+
+.input_success > .input__block .input__control {
+box-shadow: var(--box-shadow-input-success);
+border-color: var(--success);
+}
+.input_invalid > .input__block .input__control {
+box-shadow: var(--box-shadow-input-error);
+border-color: var(--error);
+}
+
+/* button */
+.button {
+width: 189px;
+height: 48px;
+border-radius: 8px;
+border: none;
+
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 19px;
+
+text-align: center;
+
+cursor: pointer;
+transition: var(--transition-button);
+}
+
+.button:disabled {
+opacity: 0.5;
+pointer-events: none;
+}
+
+/* primary */
+.button_primary {
+color: var(--primary-text);
+background-color: var(--primary);
+}
+
+.button_primary:hover {
+background-color: var(--primary-hover);
+}
+
+/* secondary */
+.button_secondary {
+color: var(--secondary-text);
+background-color: var(--secondary);
+}
+
+.button_secondary:hover {
+background-color: var(--secondary-hover);
+}
+
+/* alternate */
+.button_alternate {
+color: var(--alternate-text);
+background-color: var(--alternate);
+border: 1px solid var(--alternate-border);
+}
+
+.button_alternate:hover {
+background-color: var(--alternate-hover);
+border: 1px solid var(--alternate-hover-border);
+}
+
+/* accordion */
+.accordion {
+  border: 1px solid var(--border-color);
+  border-radius: 0.5em;
+  padding: 1em 1.5em;
+  font-family: var(--ff-secondary);
+  font-size: 1rem;
+  line-height: 1.5;
+  background-color: var(--main-bg);
+}
+
+.accordion__summary {
+  display: block;
+  outline: none;
+  height : 1.5em;
+}
+
+.accordion__title {
+  float: left;
+}
+
+.accordion__icon {
+  float: right;
+}
+
+.accordion__summary::after {
+  clear: both;
+}
+
+.accordion__summary:focus {
+  border-radius: 2px;
+  padding: 2px 4px;
+  box-shadow: 0px 0px 2px 2px var(--outline-color);
+}
+
+.accordion__summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordion__title {
+  color: var(--accordion-title);
+}
+
+.accordion__text {
+  color: var(--accordion-text);
+}
+
+.accordion[open] .accordion__icon {
+  transform: rotate(180deg);
+  transition: transform 0.35s ease-out;
+}
+
+.accordion__icon {
+  color: var(--accordion-text);
+  margin-left: auto;
+  transition: transform 0.35s ease-out;
+}
+
+.accordion[open] .accordion__summary ~ * {
+  animation: sweep .5s ease-in-out;
+}
+
+@keyframes sweep {
+  0%    {opacity: 0; margin-left: -10px}
+  100%  {opacity: 1; margin-left: 0px}
+}
+              </code>
+            </pre>
+          </div>
+        </section>
+      </section>
+    </main>
+    <footer class="page__footer">
+      <h4 class="page__footer-title">Reusable component library</h4>
+    </footer>
+  </div>
+  <script src="../src/js/schema.js"></script>
+  <script src="../src/js/toggler.js"></script>
+  <script src="../src/js/mob-menu.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

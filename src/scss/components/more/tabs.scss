@@ -1,0 +1,137 @@
+/* ТАБы */
+
+$tab_count: 7; // максимальное количество ТАБов
+
+.tabs {
+  width: 100%;
+  overflow-x: scroll;
+  background-color: var(--tabs-color-bg);
+
+  &_white {
+    background-color: var(--main-bg);
+  }
+
+  &__input {
+    position: absolute;
+    opacity: 0;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    z-index: -1;
+  }
+
+  &__scroller {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
+
+    @media (min-width: 356px) {
+      flex-direction: row;
+      height: 48px;
+      overflow-x: scroll;
+    }
+  }
+
+  &_pre,
+  &__code {
+    white-space: pre;
+    overflow-x: auto;
+    margin: 0;
+  }
+
+  &__label {
+    font-family: var(--ff-secondary);
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 8px;
+    color: var(--grey-3);
+    white-space: nowrap;
+    position: relative;
+
+    @media (min-width: 356px) {
+      margin-bottom: 0;
+      margin-right: 40px;
+      padding-top: 6px;
+      padding-bottom: 4px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    // подготовка для подчёркивания названия ТАБа
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      border-bottom: 5px solid transparent;
+      transform: scaleX(0);
+      transition: all 0.25s ease-in-out;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  // изначально содержание всех ТАБов скрыто
+  &__content {
+    display: none;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    border-top: 1px solid var(--tabs-content-border-bg);
+
+    &.tabs__content_p0 {
+      padding: 0;
+    }
+
+    &_grey {
+      background-color: var(--tabs-content-grey-bg);
+    }
+  }
+
+  &__input {
+    // отображение содержания всех ТАБов при выбре ТАБа с модификатором .tabs__input_all
+    &.tabs__input_all:checked ~ .tabs__content {
+      display: block;
+    }
+  }
+}
+
+// отображение содержания выбранного ТАБа
+@for $i from 1 through $tab_count {
+  .tabs__input:nth-child(#{$i}):checked ~ .tabs__content_#{$i} {
+    display: block;
+  }
+}
+
+// выделение названия выбранного ТАБа
+@for $i from 1 through $tab_count {
+  // prettier-ignore
+  .tabs__input:nth-child(#{$i}):checked ~ .tabs__scroller > .tabs__label:nth-child(#{$i}) {
+    color: var(--tabs-checked);
+  }
+}
+
+// подчёркивание ТАБа при наведении мышки
+@for $i from 1 through $tab_count {
+  // prettier-ignore
+  .tabs__input:nth-child(#{$i}):hover ~ .tabs__scroller > .tabs__label:nth-child(#{$i})::after {
+    border-bottom-color: var(--tabs-checked);
+    transform: scaleX(1);
+  }
+}
+
+// подчёркивание ТАБа при выборе
+@for $i from 1 through $tab_count {
+  // prettier-ignore
+  .tabs__input:nth-child(#{$i}):checked ~ .tabs__scroller > .tabs__label:nth-child(#{$i})::after {
+    border-bottom-color: var(--tabs-checked);
+    transform: scaleX(1);
+  }
+}

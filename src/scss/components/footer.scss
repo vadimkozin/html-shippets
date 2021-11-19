@@ -1,0 +1,24 @@
+/* Подвал */
+.footer {
+  padding-top: 72px;
+  padding-bottom: 72px;
+  color: var(--footer-text);
+  text-align: center;
+
+  &__title {
+    margin: 0;
+    font-family: var(--ff-secondary);
+    font-weight: 500;
+    font-size: 38px;
+    line-height: 48px;
+  }
+
+  &__description {
+    max-width: 640px;
+    margin: 32px auto 0;
+    font-family: var(--ff-secondary);
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+  }
+}

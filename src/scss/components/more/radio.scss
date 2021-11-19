@@ -1,0 +1,85 @@
+.radio {
+  line-height: 0;
+  position: relative;
+
+  &__input {
+    position: absolute;
+    opacity: 0;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    z-index: -1;
+  }
+
+  &__label {
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+    font-family: var(--ff-secondary);
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--label-color);
+    /* состояние радиокнопки по умолчанию (default) */
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+      flex-grow: 0;
+      border: 1px solid var(--radio-border-default-color);
+      border-radius: 50%;
+      margin-right: 12px;
+      box-sizing: border-box;
+    }
+  }
+
+  &__input {
+    /* наведении курсора */
+    &:not(:disabled):not(.radio_disabled):not(:checked) + .radio__label:hover {
+      cursor: pointer;
+    }
+    // prettier-ignore
+    &:not(:disabled):not(.radio_disabled):not(:checked) + .radio__label:hover::before {
+      border-color: var(--radio-border-hover-color);
+    }
+    /* активная радиокнопка, при нажатии */
+    &:not(:disabled):not(.radio_disabled):active + .radio__label::before {
+      background-color: var(--radio-active-bg);
+    }
+    /* надпись радиокнопки в фокусе */
+    &:not(:disabled):not(.radio_disabled):focus + .radio__label {
+      text-decoration: underline;
+    }
+    /* радиокновка выбрана (checked) - внешняя часть */
+    &:not(:disabled):not(.radio_disabled):checked + .radio__label::before {
+      background-color: var(--radio-checked-bg);
+      border: 2px solid var(--radio-checked-border-color);
+      animation: splash 0.5s ease-out;
+    }
+    /* радиокновка выбрана (checked) - внутренняя часть */
+    &:not(:disabled):not(.radio_disabled):checked + .radio__label::after {
+      position: absolute;
+      content: '';
+      left: 5px;
+      top: 5px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--radio-checked-inside-bg);
+    }
+    /* радиокнопка в состоянии disabled */
+    &.radio_disabled + .radio__label::before,
+    &:disabled + .radio__label::before {
+      background-color: var(--radio-disabled);
+    }
+    /* надпись радиокнопки в состоянии disabled */
+    &.radio_disabled + .radio__label,
+    &:disabled + .radio__label {
+      color: var(--radio-disabled);
+    }
+  }
+}

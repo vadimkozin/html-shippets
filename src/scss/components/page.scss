@@ -1,0 +1,74 @@
+/*  Страница компонента */
+.page {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--main-bg);
+
+  &__box {
+    width: calc(100% - 8px);
+    margin: 0 auto;
+    @media (min-width: 356px) {
+      width: calc(100% - 16px);
+    }
+    @media (min-width: 768px) {
+      max-width: var(--container-width);
+    }
+  }
+
+  &_component {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      'header'
+      'main'
+      'footer';
+    min-height: 100%;
+    background-color: var(--page-component-bg);
+    @media (min-width: 768px) {
+      grid-template-areas:
+        'header header header'
+        'main main main'
+        'footer footer footer';
+    }
+  }
+
+  &__header {
+    grid-area: header;
+  }
+
+  &__main {
+    grid-area: main;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    justify-self: center;
+    margin-top: 60px;
+    @media (min-width: 768px) {
+      grid-template-columns: auto 1fr;
+    }
+  }
+
+  &__footer {
+    grid-area: footer;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: var(--page-component-bg);
+  }
+
+  &__footer-title {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-family: var(--ff-secondary);
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--page-footer-title);
+    @media (min-width: 768px) {
+      padding-top: 32px;
+      padding-bottom: 32px;
+    }
+  }
+}

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
+  <link rel="stylesheet" href="../dist/styles.css">
+</head>
+<body>
+  <h1 class="available-hidden">Reusable component library sources</h1>
+  <div class="page page_component">
+    <header class="page__header page__box">
+      <div class="header header_grey header__top-panel">
+        <button id="mob-menu-open" class="header__mob-menu-open">
+          <svg class="header__mob-menu-open-icon">
+            <use xlink:href="../src/images/sprite.svg#menu"></use>
+          </svg>
+        </button>
+        <!-- Mobile menu - start -->
+        <div id="mob-menu" class="mob-menu">
+          <div class="mob-menu__window">
+            <div class="mob-menu__header x-p12">
+              <button id="mob-menu-close" class="mob-menu__close">
+                <svg class="mob-menu__icon-close">
+                  <use xlink:href="../src/images/sprite.svg#menu-close"></use>
+                </svg>
+              </button>
+              <svg class="mob-menu__icon-logo">
+                <use xlink:href="../src/images/sprite.svg#logo"></use>
+              </svg>
+            </div>
+            <div class="mob-menu__divider x-m12 x-mt16"></div>
+            <nav class="mob-menu__nav x-p12">
+              <div class="mob-menu__control">
+                <span class="mob-menu__mode">Dark mode</span>
+                <label class="toggler" id="toggler-schema-modal">
+                  <input class="toggler__input" type="checkbox" name="toggler" value="1">
+                  <p class="toggler__label"></p>
+              </label>
+              </div>
+              <div class="mob-menu__divider"></div>
+              <h4 class="mob-menu__title">Components</h4>
+              <ul>
+                <li class="mob-menu__item"><a class="mob-menu__link mob-menu__link_active">Modal</a></li>
+                <li class="mob-menu__item"><a class="mob-menu__link" href="./tooltip.html">Tooltip</a></li>
+                <li class="mob-menu__item"><a class="mob-menu__link" href="./avatar.html">Avatar</a></li>
+                <li class="mob-menu__item"><a class="mob-menu__link" href="./calendar.html">Calendar</a></li>
+                <li class="mob-menu__item"><a class="mob-menu__link" href="./histogram.html">Histogram</a></li>
+                <li class="mob-menu__item"><a class="mob-menu__link" href="./form.html">Custom form elements</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- Mobile menu - end -->
+        <a class="header__link-main" href="/">
+          <svg class="header__logo" width="110" height="32">
+            <use xlink:href="../src/images/sprite.svg#logo"></use>
+            <use xlink:href=""></use>
+          </svg>
+        </a>
+        <div class="header__nav">
+            <div class="nav">
+                <ul class="menu menu_top">
+                    <li class="menu__item menu__item_active">Components</li>
+                    <li class="menu__item">About</li>
+                    <li class="menu__item">Contact</li>
+                </ul>
+                <div class="nav__controls">
+                  <svg id="sun" class="nav__controls-item" width="24" height="24">
+                    <use xlink:href="../src/images/sprite.svg#sun"></use>
+                  </svg>
+                  <label class="nav__controls-item toggler" id="toggler-schema">
+                    <input class="toggler__input" type="checkbox" name="toggler" value="1">
+                    <p class="toggler__label"></p>
+                  </label>
+                  <svg id="moon" class="nav__controls-item" width="24" height="24">
+                    <use xlink:href="../src/images/sprite.svg#moon"></use>
+                  </svg>
+              </div>
+            </div>
+        </div>
+      </div>
+    </header>
+    <main class="page__main page__box">
+      <aside class="sidebar">
+        <h3 class="sidebar__title">Components</h3>
+        <nav>
+          <ul>
+            <li class="sidebar__item sidebar__item_active"><a class="sidebar__link">Modal</a></li>
+            <li class="sidebar__item"><a class="sidebar__link" href="./tooltip.html">Tooltip</a></li>
+            <li class="sidebar__item"><a class="sidebar__link" href="./avatar.html">Avatar</a></li>
+            <li class="sidebar__item"><a class="sidebar__link" href="./calendar.html">Calendar</a></li>
+            <li class="sidebar__item"><a class="sidebar__link" href="./histogram.html">Histogram</a></li>
+            <li class="sidebar__item"><a class="sidebar__link" href="./form.html">Custom form elements</a></li>
+          </ul>
+        </nav>
+      </aside>
+      <section class="component">
+        <h2 class="component__title">Modal</h2>
+        <section class="component__wrapper">
+          <!---->
+          <a id="modal-open" class="button button_primary button_center" href="#modal">Open modal</a>
+          <div id="modal" class="modal">
+            <div class="modal__window">
+              <a id="modal-close" href="#" title="Close" class="modal__close">
+                <svg class="modal__svg-icon">
+                  <use xlink:href="../src/images/sprite.svg#cross"></use>
+                </svg>          
+              </a>
+              <div class="modal__body">
+                <div class="modal__body-title">
+                  Modal title
+                </div>
+                <div class="modal__body-text">
+                  Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.<br />
+                </div>
+              </div>
+            </div>
+          </div> 
+          <!---->
+        </section>
+          <div class="component__tabs tabs">
+            <div class="tabs tabs_white">
+              <input class="tabs__input" type="radio" name="tabs-nav" id="#tab1" checked>
+              <input class="tabs__input" type="radio" name="tabs-nav" id="#tab2">
+              <div class="tabs__scroller">
+                <label class="tabs__label" for="#tab1">HTML</label>
+                <label class="tabs__label" for="#tab2">CSS</label>
+              </div>
+              <div class="tabs__content tabs__content_1 tabs__content_p0">
+                <pre class="tabs__code">
+                  <code>
+&lt;a id=&quot;modal-open&quot; class=&quot;button button_primary&quot; href=&quot;#modal&quot;&gt;Open modal&lt;/a&gt;
+&lt;div id=&quot;modal&quot; class=&quot;modal&quot;&gt;
+  &lt;div class=&quot;modal__window&quot;&gt;
+    &lt;a id=&quot;modal-close&quot; href=&quot;#&quot; title=&quot;Close&quot; class=&quot;modal__close&quot;&gt;
+      &lt;svg class=&quot;modal__svg-icon&quot;&gt;
+        &lt;use xlink:href=&quot;../../assets/images/sprite.svg#cross&quot;&gt;&lt;/use&gt;
+      &lt;/svg&gt;          
+    &lt;/a&gt;
+    &lt;div class=&quot;modal__body&quot;&gt;
+      &lt;div class=&quot;modal__body-title&quot;&gt;
+        Modal title
+      &lt;/div&gt;
+      &lt;div class=&quot;modal__body-text&quot;&gt;
+        Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.&lt;br /&gt;
+        Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt; 
+                  </code>
+                </pre>
+              </div>
+              <div class="tabs__content tabs__content_2 tabs__content_p0">
+                <pre class="tabs__code">
+                  <code>
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+
+  transition: all 0.25s;
+  z-index: 111;
+  background-color: var(--bg-grey);
+}
+
+.modal:target {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal__window {
+  position: absolute;
+  max-width: 428px;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px 40px 33px;
+  background-color: var(--white);
+  border-radius: 8px;
+}
+
+.modal__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+.modal__svg-icon {
+  color: var(--grey-4);
+  width: 24px;
+  height: 24px;
+}
+
+.modal__body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-family: var(--ff-secondary);
+}
+
+.modal__body-title {
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: var(--grey-5);
+}
+
+.modal__body-text {
+  font-family: inherit;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--grey-4);
+}
+                  </code>
+                </pre>
+              </div>
+          </div>
+      </section>
+    </main>
+    <footer class="page__footer">
+      <h4 class="page__footer-title">Reusable component library</h4>
+    </footer>
+  </div>
+  <script src="../src/js/schema.js"></script>
+  <script src="../src/js/toggler.js"></script>
+  <script src="../src/js/mob-menu.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

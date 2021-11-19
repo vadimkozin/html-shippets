@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library HTMLCSS components</title>
+  <link rel="stylesheet" href="./dist/styles.css">
+  <style>
+    .wrapper {
+      width: 100%;
+    }
+
+    .tooltip-wrapper {
+      padding-top: 60px;
+    }
+
+    .input-wrapper {
+      display: flex;
+      flex-flow: row wrap;
+      width: 100%;
+      gap: 10px;
+    }
+
+    .form-elements-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      /* gap: 32px; */
+    }
+    .form-elements-wrapper > * + * {
+      margin-top: 32px;
+    }
+
+    @media (min-width: 768px) {
+      .form-elements-wrapper {
+        flex-direction: row;
+      }
+      .form-elements-wrapper > * + * {
+        margin-top: 0;
+        margin-left: 32px;
+      }
+    }
+
+    .radio-wrapper, 
+    .checkbox-wrapper, 
+    .toggler-wrapper {
+      display: flex;
+      flex-direction: column;
+      text-align: initial;
+    }
+
+    .radio-wrapper > * + *,
+    .checkbox-wrapper > * + *,
+    .toggler-wrapper > * + * {
+      margin-top: 12px;
+    }
+    @media (min-width: 768px) {
+      .radio-wrapper > * + *,
+      .checkbox-wrapper > * + *,
+      .toggler-wrapper > * + *  {
+        margin-top: 24px;
+      }
+    }
+
+    .vertical-item {
+      margin-bottom: 8px;
+    }
+
+    .vertical-:last-child {
+      margin-bottom: 0;
+    }
+
+    .buttons-wrapper {
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      gap: 8px;
+    }
+ 
+    @media (min-width:768px) {
+      .buttons-wrapper {
+        grid-template-columns: repeat(4, auto);
+        grid-template-rows: repeat(2, auto);
+        grid-auto-flow: column;
+        gap: 16px;
+      }
+    }
+
+    .element-title {
+      color: var(--element-title-text);
+      display: block;
+      font-family: var(--ff-secondary);
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 38px;
+      margin: 64px 0 32px;
+      text-transform: uppercase;
+    }
+
+    .no-pointer-events {
+      pointer-events: none;
+    }
+
+    .cards-wrapper {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 258px), 1fr));
+      gap: 16px;
+    }
+ 
+    @media (min-width: 768px) {
+      .cards-wrapper {
+        gap: 30px;
+      }
+    }
+  </style>  
+</head>
+<body class="page">
+  <header class="header container">
+      <div class="header__top-panel">
+        <button id="mob-menu-open" class="header__mob-menu-open">
+          <svg class="header__mob-menu-open-icon">
+            <use xlink:href="../src/images/sprite.svg#menu"></use>
+          </svg>
+        </button>
+        <!-- Mobile menu - start -->
+        <div id="mob-menu" class="mob-menu">
+          <div class="mob-menu__window">
+            <div class="mob-menu__header x-p12">
+              <button id="mob-menu-close" class="mob-menu__close">
+                <svg class="mob-menu__icon-close">
+                  <use xlink:href="../src/images/sprite.svg#menu-close"></use>
+                </svg>
+              </button>
+              <svg class="mob-menu__icon-logo">
+                <use xlink:href="../src/images/sprite.svg#logo"></use>
+              </svg>
+            </div>
+            <div class="mob-menu__divider x-m12 x-mt16"></div>
+            <nav class="mob-menu__nav x-p12">
+              <div class="mob-menu__control">
+                <span class="mob-menu__mode">Dark mode.</span>
+                <label class="toggler" id="toggler-schema-modal">
+                  <input class="toggler__input" type="checkbox" name="toggler" value="1">
+                  <span class="toggler__label"></span>
+              </label>
+              </div>
+              <div class="mob-menu__divider"></div>
+              <h4 class="mob-menu__title">Components</h4>
+              <ul>
+                <li class="mob-menu__item"><a class="mob-menu__link" href="./pages/modal.html">Modal</a></li>
+                <li class="mob-menu__item"><a class="mob-menu__link" href="./pages/tooltip.html">Tooltip</a></li>
+                <li class="mob-menu__item"><a class="mob-menu__link" href="./pages/avatar.html">Avatar</a></li>
+                <li class="mob-menu__item"><a class="mob-menu__link" href="./pages/calendar.html">Calendar</a></li>
+                <li class="mob-menu__item"><a class="mob-menu__link" href="./pages/histogram.html">Histogram</a></li>
+                <li class="mob-menu__item"><a class="mob-menu__link" href="./pages/form.html">Custom form elements</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- Mobile menu - end -->
+        <svg class="header__logo" width="110" height="32">
+          <use xlink:href="../src/images/sprite.svg#logo"></use>
+        </svg>
+        <div class="header__nav">
+            <div class="nav">
+                <ul class="menu menu_top">
+                    <li class="menu__item menu__item_active"><a class="menu__item_link" href="pages/modal.html">Components</a></li>
+                    <li class="menu__item">About</li>
+                    <li class="menu__item">Contact</li>
+                </ul>
+                <div class="nav__controls">
+                  <svg id="sun" class="nav__controls-item" width="24" height="24">
+                    <use xlink:href="../src/images/sprite.svg#sun"></use>
+                  </svg>
+                  <label class="nav__controls-item toggler" id="toggler-schema">
+                    <input class="toggler__input" type="checkbox" name="toggler" value="1">
+                    <span class="toggler__label"></span>
+                  </label>
+                  <svg id="moon" class="nav__controls-item" width="24" height="24">
+                    <use xlink:href="../src/images/sprite.svg#moon"></use>
+                  </svg>
+                </div>
+            </div>
+        </div>
+      </div>        
+      <h1 class="header__title">Reusable component library</h1>
+  </header>
+  <main class="main">
+    <section class="tabs tabs_white">
+      <input class="tabs__input" type="radio" name="tabs-nav" id="#tab1" checked>
+      <input class="tabs__input" type="radio" name="tabs-nav" id="#tab2">
+      <input class="tabs__input" type="radio" name="tabs-nav" id="#tab3">
+      <input class="tabs__input" type="radio" name="tabs-nav" id="#tab4">
+
+      <div class="tabs__scroller container">
+        <label class="tabs__label" for="#tab1">All components</label>
+        <label class="tabs__label" for="#tab2">Atoms</label>
+        <label class="tabs__label" for="#tab3">Molecules</label>
+        <label class="tabs__label" for="#tab4">Organisms</label>
+      </div>
+
+      <!-- All components begin -->
+      <section class="tabs__content tabs__content_1 tabs__content_grey"> 
+        <h2 class="available-hidden">All components</h2>
+        <section class="container cards-wrapper">
+          <!-- Tooltip -->
+          <a href="/pages/tooltip.html" class="card">
+            <div class="card__top">
+              <!---->
+              <div class="tooltip-wrapper">
+                <div class="tooltip tooltip_active">
+                  <svg class="tooltip__icon">
+                    <use xlink:href="../src/images/sprite.svg#help"></use>
+                  </svg>
+                  <div class="tooltip__help">
+                    <div class="tooltip__text">Helper text</div>
+                  </div>
+                </div>
+              </div>
+              <!---->
+            </div>
+            <div class="card__bottom">
+              <div class="card__title">Tolltip</div>
+              <div class="card__subtitle">Container</div>
+            </div>
+          </a>
+    
+          <!-- Modal -->
+          <a href="/pages/modal.html" class="card">
+            <div class="card__top">
+              <!---->
+                <div class="modal__window modal__window_preview">
+                  <div id="modal-close" href="#" title="Close" class="modal__close">
+                    <svg class="modal__svg-icon">
+                      <use xlink:href="../src/images/sprite.svg#cross"></use>
+                    </svg>          
+                  </div>
+                  <div class="modal__body">
+                    <div class="modal__body-title">
+                      Title
+                    </div>
+                    <div class="modal__body-text">
+                      Amet minim mollit non deserunt aliqua.
+                    </div>
+                  </div>
+                </div>
+              <!---->
+            </div>
+            <div class="card__bottom">
+              <div class="card__title">Modal</div>
+              <div class="card__subtitle">Organism</div>
+            </div>
+          </a>
+    
+          <!-- Histogram -->
+          <a href="/pages/histogram.html" class="card">
+            <div class="card__top">
+              <!---->
+              <section class="histogram">
+                <div class="histogram__headers">
+                  <div class="histogram__total">
+                    <span class="histogram__total-name">Total orders</span>
+                    <span class="histogram__total-number">50254</span>
+                  </div>
+                  <div class="histogram__view">
+                    <span class="histogram__view-name">View all</span>
+                  </div>
+                </div>
+                <div class="histogram__charts">
+                  <div class="histogram__chart" style="height:100%"></div>
+                  <div class="histogram__chart" style="height:70%"></div> 
+                  <div class="histogram__chart" style="height:44%"></div>
+                  <div class="histogram__chart" style="height:78%"></div>
+                  <div class="histogram__chart" style="height:44%"></div>
+              
+                  <div class="histogram__chart" style="height:60%"></div>
+                  <div class="histogram__chart" style="height:78%"></div>
+                  <div class="histogram__chart" style="height:100%"></div>
+                  <div class="histogram__chart" style="height:22%"></div>
+                  <div class="histogram__chart" style="height:44%"></div> 
+              
+                  <div class="histogram__chart" style="height:60%"></div>
+                  <div class="histogram__chart" style="height:70%"></div>
+                  <div class="histogram__chart" style="height:22%"></div>
+                  <div class="histogram__chart" style="height:100%"></div>
+                  <div class="histogram__chart" style="height:22%"></div>
+              
+                  <div class="histogram__chart" style="height:78%"></div>
+                  <div class="histogram__chart" style="height:60%"></div>
+                  <div class="histogram__chart" style="height:44%"></div>
+                  <div class="histogram__chart" style="height:70%"></div>
+                  <div class="histogram__chart" style="height:60%"></div>
+                </div>
+              </section>
+              <!---->
+    
+            </div>
+            <div class="card__bottom">
+              <div class="card__title">Histogram</div>
+              <div class="card__subtitle">Organism</div>
+            </div>
+          </a>
+    
+          <!-- Avatar -->
+          <a href ="/pages/avatar.html" class="card">
+            <div class="card__top">
+              <!---->
+              <div class="avatar">
+                <img src="../src/images/avatar-200.jpg" class="avatar__image" alt="Avatar"/>
+              </div>
+              <!---->
+            </div>
+            <div class="card__bottom">
+              <div class="card__title">Avatar</div>
+              <div class="card__subtitle">Atom</div>
+            </div>
+          </a>
+    
+          <!-- Custom form elements -->
+          <a href="/pages/form.html" class="card">
+            <div class="card__top no-pointer-events">
+              <div class="form-elements-wrapper">
+                <div class="radio-wrapper"> <!-- radio -->
+                  <label class="radio">
+                    <input class="radio__input" type="radio" name="radio" value="1">
+                    <span class="radio__label">Default</span>
+                  </label>
+                  <label class="radio">
+                    <input class="radio__input" type="radio" name="radio" value="2" checked>
+                    <span class="radio__label">Selected</span>
+                  </label>
+                </div>
+                <div class="checkbox-wrapper"> <!-- checkbox -->
+                    <label class="checkbox">
+                        <input class="checkbox__input" type="checkbox" name="checkbox-set" value="1">
+                        <div class="checkbox__state">
+                            <div class="checkbox__control">
+                                <svg class="checkbox__icon">
+                                    <use xlink:href="../src/images/sprite.svg#check"></use>
+                                </svg>  
+                            </div>
+                            <div class="checkbox__label">
+                                Default
+                            </div>
+                        </div>
+                    </label>
+                
+                    <label class="checkbox">
+                        <input class="checkbox__input" type="checkbox" name="checkbox-set" value="2" checked>
+                        <div class="checkbox__state">
+                            <div class="checkbox__control">
+                                <svg class="checkbox__icon">
+                                    <use xlink:href="../src/images/sprite.svg#check"></use>
+                                </svg>  
+                            </div>
+                            <div class="checkbox__label">
+                              Checked
+                            </div>
+                        </div>
+                    </label>
+                </div>
+              </div>
+            </div>
+            <div class="card__bottom">
+              <div class="card__title">Custom form elements</div>
+              <div class="card__subtitle">Molecule</div>
+            </div>
+          </a>
+    
+          <!-- Calendar -->
+          <a href="/pages/calendar.html" class="card">
+            <div class="card__top">
+              <!---->
+              <div class="calendar calendar_preview">
+                <div class="calendar__title">October 2021</div>
+                <div class="calendar__wrapper">
+                  <div class="calendar__inner">
+                    <span class="calendar__item calendar__item_day">Mon</span>
+                    <span class="calendar__item calendar__item_day">Tue</span>
+                    <span class="calendar__item calendar__item_day">Wed</span>
+                    <span class="calendar__item calendar__item_day">Thu</span>
+                    <span class="calendar__item calendar__item_day">Fri</span>
+                    <span class="calendar__item calendar__item_day">Sat</span>
+                    <span class="calendar__item calendar__item_day">Sun</span>
+                    <span class="calendar__item"></span>
+                    <span class="calendar__item"></span>
+                    <span class="calendar__item"></span>
+                    <span class="calendar__item"></span>
+                    <span class="calendar__item">1</span>
+                    <span class="calendar__item">2</span>
+                    <span class="calendar__item">3</span>
+                    <span class="calendar__item">4</span>
+                    <span class="calendar__item">5</span>
+                    <span class="calendar__item">6</span>
+                    <span class="calendar__item">7</span>
+                    <span class="calendar__item">8</span>
+                    <span class="calendar__item">9</span>
+                    <span class="calendar__item">10</span>
+                    <span class="calendar__item">11</span>
+                    <span class="calendar__item">12</span>
+                    <span class="calendar__item">13</span>
+                    <span class="calendar__item">14</span>
+                    <span class="calendar__item">15</span>
+                    <span class="calendar__item">16</span>
+                    <span class="calendar__item">17</span>
+                    <span class="calendar__item calendar__item_active">18</span>
+                    <span class="calendar__item calendar__item_between-active">19</span>
+                    <span class="calendar__item calendar__item_between-active">20</span>
+                    <span class="calendar__item calendar__item_between-active">21</span>
+                    <span class="calendar__item calendar__item_between-active">22</span>
+                    <span class="calendar__item calendar__item_active">23</span>
+                    <span class="calendar__item">24</span>
+                    <span class="calendar__item">25</span>
+                    <span class="calendar__item">26</span>
+                    <span class="calendar__item">27</span>
+                    <span class="calendar__item">28</span>
+                    <span class="calendar__item">29</span>
+                    <span class="calendar__item">30</span>
+                    <span class="calendar__item">31</span>
+                  </div>
+                </div>
+              </div>
+              <!---->          
+            </div>
+            <div class="card__bottom">
+              <div class="card__title">Calendar</div>
+              <div class="card__subtitle">Molecule</div>
+            </div>
+          </a> 
+        </section>        
+      </section>
+      <!-- All components end -->
+
+      <!-- Atoms begin -->
+      <section class="tabs__content tabs__content_2 tabs__content_grey"> 
+        <h2 class="available-hidden">Atoms</h2>
+        <section class="container cards-wrapper">
+          <!-- Tooltip -->
+          <a href="/pages/tooltip.html" class="card">
+            <div class="card__top">
+              <!---->
+              <div class="tooltip-wrapper">
+                <div class="tooltip tooltip_active">
+                  <svg class="tooltip__icon">
+                    <use xlink:href="../src/images/sprite.svg#help"></use>
+                  </svg>
+                  <div class="tooltip__help">
+                    <div class="tooltip__text">Helper text</div>
+                  </div>
+                </div>
+              </div>
+              <!---->
+            </div>
+            <div class="card__bottom">
+              <div class="card__title">Tolltip</div>
+              <div class="card__subtitle">Container</div>
+            </div>
+          </a>
+          <!-- Avatar -->
+          <a href="/pages/avatar.html" class="card">
+            <div class="card__top">
+              <!---->
+              <div class="avatar">
+                <img src="../src/images/avatar-200.jpg" class="avatar__image" alt="Avatar"/>
+              </div>
+              <!---->
+            </div>
+            <div class="card__bottom">
+              <div class="card__title">Avatar</div>
+              <div class="card__subtitle">Atom</div>
+            </div>
+          </a>
+        </section>
+        <section class="container ">
+          <h3 class="element-title">Buttons</h3>
+          <div class="buttons-wrapper">
+            <button class="button">Button</button>
+            <button class="button" disabled>Button disabled</button>
+            <button class="button button_primary">Primary</button>
+            <button class="button button_primary" disabled>Primary disabled</button>
+            <button class="button button_secondary">Secondary</button>
+            <button class="button button_secondary" disabled>Secondary disabled</button>
+            <button class="button button_alternate">Alternate</button>
+            <button class="button button_alternate" disabled>Alternate disabled</button>
+          </div>
+        </section>
+        <section class="container ">
+          <h3 class="element-title">Custom Form Elements</h3>
+          <div class="forms-wrapper">
+            <div class="form-elements-wrapper">
+              <div class="radio-wrapper"> <!-- radio -->
+                <label class="radio">
+                  <input class="radio__input" type="radio" name="radio2" value="1">
+                  <span class="radio__label">Default</span>
+                </label>
+                <label class="radio">
+                  <input class="radio__input" type="radio" name="radio2" value="2" checked>
+                  <span class="radio__label">Selected</span>
+                </label>
+                <label class="radio">
+                  <input class="radio__input" type="radio" name="radio2" value="3" disabled>
+                  <span class="radio__label">Disabled</span>
+                </label>
+              </div>
+              <div class="checkbox-wrapper"> <!-- checkbox -->
+                  <label class="checkbox">
+                      <input class="checkbox__input" type="checkbox" name="checkbox-set" value="1">
+                      <div class="checkbox__state">
+                          <div class="checkbox__control">
+                              <svg class="checkbox__icon">
+                                  <use xlink:href="../src/images/sprite.svg#check"></use>
+                              </svg>  
+                          </div>
+                          <div class="checkbox__label">
+                              Default
+                          </div>
+                      </div>
+                  </label>
+              
+                  <label class="checkbox">
+                      <input class="checkbox__input" type="checkbox" name="checkbox-set" value="2" checked>
+                      <div class="checkbox__state">
+                          <div class="checkbox__control">
+                              <svg class="checkbox__icon">
+                                  <use xlink:href="../src/images/sprite.svg#check"></use>
+                              </svg>  
+                          </div>
+                          <div class="checkbox__label">
+                            Checked
+                          </div>
+                      </div>
+                  </label>
+
+                  <label class="checkbox">
+                    <input class="checkbox__input" type="checkbox" name="checkbox-set" value="3" disabled>
+                    <div class="checkbox__state">
+                        <div class="checkbox__control">
+                            <svg class="checkbox__icon">
+                                <use xlink:href="../src/images/sprite.svg#check"></use>
+                            </svg>  
+                        </div>
+                        <div class="checkbox__label">
+                            Disabled
+                        </div>
+                    </div>
+                </label>
+              </div>
+              <div class="toggler-wrapper"> <!-- toggler -->
+                <label class="toggler">
+                  <input class="toggler__input available-hidden" type="checkbox" name="toggler" value="1">
+                  <p class="toggler__label"><span class="toggler__label-text">Off</span></p>
+              </label>
+      
+              <label class="toggler">
+                  <input class="toggler__input available-hidden" type="checkbox" name="toggler" value="2" checked>
+                  <p class="toggler__label"><span class="toggler__label-text">On</span></p>
+              </label>
+      
+              <label class="toggler">
+                  <input class="toggler__input available-hidden" type="checkbox" name="toggler" value="3" disabled>
+                  <p class="toggler__label"><span class="toggler__label-text">Disabled</span></p>
+              </label>
+      
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+      <!-- Atoms end -->
+
+      <!-- Molecules begin -->
+      <section class="tabs__content tabs__content_3 tabs__content_grey"> 
+        <h2 class="available-hidden">Molecules</h2>
+        <section class="container cards-wrapper">
+          <!-- Custom form elements: radio/checkbox -->
+          <a href="/pages/form.html" class="card">
+            <div class="card__top no-pointer-events">
+              <div class="form-elements-wrapper">
+                <div class="radio-wrapper"> <!-- radio -->
+                  <label class="radio">
+                    <input class="radio__input" type="radio" name="radio3" value="1">
+                    <span class="radio__label">Default</span>
+                  </label>
+                  <label class="radio">
+                    <input class="radio__input" type="radio" name="radio3" value="2" checked>
+                    <span class="radio__label">Selected</span>
+                  </label>
+                </div>
+                <div class="checkbox-wrapper"> <!-- checkbox -->
+                    <label class="checkbox">
+                        <input class="checkbox__input" type="checkbox" name="checkbox-set" value="1">
+                        <div class="checkbox__state">
+                            <div class="checkbox__control">
+                                <svg class="checkbox__icon">
+                                    <use xlink:href="../src/images/sprite.svg#check"></use>
+                                </svg>  
+                            </div>
+                            <div class="checkbox__label">
+                                Default
+                            </div>
+                        </div>
+                    </label>
+                
+                    <label class="checkbox">
+                        <input class="checkbox__input" type="checkbox" name="checkbox-set" value="2" checked>
+                        <div class="checkbox__state">
+                            <div class="checkbox__control">
+                                <svg class="checkbox__icon">
+                                    <use xlink:href="../src/images/sprite.svg#check"></use>
+                                </svg>  
+                            </div>
+                            <div class="checkbox__label">
+                              Checked
+                            </div>
+                        </div>
+                    </label>
+                </div>
+              </div>
+            </div>
+            <div class="card__bottom">
+              <div class="card__title">Custom form elements</div>
+              <div class="card__subtitle">Molecules</div>
+            </div>
+          </a>
+          <!-- Calendar -->
+          <a href="/pages/calendar.html" class="card">
+            <div class="card__top">
+              <!---->
+              <div class="calendar calendar_preview">
+                <div class="calendar__title">October 2021</div>
+                <div class="calendar__wrapper">
+                  <div class="calendar__inner">
+                    <span class="calendar__item calendar__item_day">Mon</span>
+                    <span class="calendar__item calendar__item_day">Tue</span>
+                    <span class="calendar__item calendar__item_day">Wed</span>
+                    <span class="calendar__item calendar__item_day">Thu</span>
+                    <span class="calendar__item calendar__item_day">Fri</span>
+                    <span class="calendar__item calendar__item_day">Sat</span>
+                    <span class="calendar__item calendar__item_day">Sun</span>
+                    <span class="calendar__item"></span>
+                    <span class="calendar__item"></span>
+                    <span class="calendar__item"></span>
+                    <span class="calendar__item"></span>
+                    <span class="calendar__item">1</span>
+                    <span class="calendar__item">2</span>
+                    <span class="calendar__item">3</span>
+                    <span class="calendar__item">4</span>
+                    <span class="calendar__item">5</span>
+                    <span class="calendar__item">6</span>
+                    <span class="calendar__item">7</span>
+                    <span class="calendar__item">8</span>
+                    <span class="calendar__item">9</span>
+                    <span class="calendar__item">10</span>
+                    <span class="calendar__item">11</span>
+                    <span class="calendar__item">12</span>
+                    <span class="calendar__item">13</span>
+                    <span class="calendar__item">14</span>
+                    <span class="calendar__item">15</span>
+                    <span class="calendar__item">16</span>
+                    <span class="calendar__item">17</span>
+                    <span class="calendar__item calendar__item_active">18</span>
+                    <span class="calendar__item calendar__item_between-active">19</span>
+                    <span class="calendar__item calendar__item_between-active">20</span>
+                    <span class="calendar__item calendar__item_between-active">21</span>
+                    <span class="calendar__item calendar__item_between-active">22</span>
+                    <span class="calendar__item calendar__item_active">23</span>
+                    <span class="calendar__item">24</span>
+                    <span class="calendar__item">25</span>
+                    <span class="calendar__item">26</span>
+                    <span class="calendar__item">27</span>
+                    <span class="calendar__item">28</span>
+                    <span class="calendar__item">29</span>
+                    <span class="calendar__item">30</span>
+                    <span class="calendar__item">31</span>
+                  </div>
+                </div>
+              </div>
+              <!---->          
+            </div>
+            <div class="card__bottom">
+              <div class="card__title">Calendar</div>
+              <div class="card__subtitle">Molecule</div>
+            </div>
+          </a> 
+        </section>
+        <!-- Skeleton -->
+        <section class="container">
+          <h3 class="element-title">Skeleton</h3>
+          <div class="skeleton-wrapper">
+            <div class="skeleton">
+              <div class="skeleton__top">
+                <div class="skeleton__circle"></div>
+                <div class="skeleton__lines">
+                  <div class="skeleton__line skeleton__line_40pr"></div>
+                  <div class="skeleton__line skeleton__line_60pr"></div>
+                </div>
+              </div>
+              <div class="skeleton__bottom">
+                <div class="skeleton__lines">
+                  <div class="skeleton__line skeleton__line_100pr"></div>
+                  <div class="skeleton__line skeleton__line_100pr"></div>
+                </div>
+              </div>
+            </div>  
+          </div>
+        </section>
+        <!-- Custom form elements: input -->
+        <section class="container">
+          <h3 class="element-title">Custom form elements</h3>
+          <div class="input-wrapper">
+            <label class="input">
+                <span class="input__label">Label</span>
+                <input class="input__control" type="text" placeholder="Placeholder">
+                <span class="input__status">Some status</span>
+            </label>
+            <label class="input input_success">
+                <span class="input__label">Success</span>
+                <div class="input__block">
+                <input class="input__control" type="text" placeholder="Placeholder" value="Success">
+                    <svg class="input__icon">
+                        <use xlink:href="../src/images/sprite.svg#success"></use>
+                    </svg>
+                </div>
+                <span class="input__status">Some status</span>
+            </label>
+            <label class="input input_invalid">
+                <span class="input__label">Error</span>
+                <div class="input__block">
+                    <input class="input__control" type="text" placeholder="Placeholder" value="Error">
+                    <svg class="input__icon">
+                        <use xlink:href="../src/images/sprite.svg#error"></use>
+                    </svg>
+                </div>
+                <span class="input__status">Some status</span>
+            </label>
+          </div>
+        </section>
+      </section>
+      <!-- Molecules end -->
+
+      <!-- Organisms begin -->
+      <section class="tabs__content tabs__content_4 tabs__content_grey"> 
+        <h2 class="available-hidden">Organisms</h2>
+        <section class="container cards-wrapper">
+          <!-- Modal -->
+          <a href="/pages/modal.html" class="card">
+            <div class="card__top">
+              <!---->
+              <div class="modal__window modal__window_preview">
+                <div id="modal-close" href="#" title="Close" class="modal__close">
+                  <svg class="modal__svg-icon">
+                    <use xlink:href="../src/images/sprite.svg#cross"></use>
+                  </svg>          
+                </div>
+                <div class="modal__body">
+                  <div class="modal__body-title">
+                    Title
+                  </div>
+                  <div class="modal__body-text">
+                    Amet minim mollit non deserunt aliqua.
+                  </div>
+                </div>
+              </div>
+              <!---->
+            </div>
+            <div class="card__bottom">
+              <div class="card__title">Modal</div>
+              <div class="card__subtitle">Organism</div>
+            </div>
+          </a>   
+          <!-- Histogram -->
+          <a href="/pages/histogram.html" class="card">
+            <div class="card__top">
+              <!---->
+              <section class="histogram">
+                <div class="histogram__headers">
+                  <div class="histogram__total">
+                    <span class="histogram__total-name">Total orders</span>
+                    <span class="histogram__total-number">50254</span>
+                  </div>
+                  <div class="histogram__view">
+                    <span class="histogram__view-name">View all</span>
+                  </div>
+                </div>
+                <div class="histogram__charts">
+                  <div class="histogram__chart" style="height:100%"></div>
+                  <div class="histogram__chart" style="height:70%"></div> 
+                  <div class="histogram__chart" style="height:44%"></div>
+                  <div class="histogram__chart" style="height:78%"></div>
+                  <div class="histogram__chart" style="height:44%"></div>
+              
+                  <div class="histogram__chart" style="height:60%"></div>
+                  <div class="histogram__chart" style="height:78%"></div>
+                  <div class="histogram__chart" style="height:100%"></div>
+                  <div class="histogram__chart" style="height:22%"></div>
+                  <div class="histogram__chart" style="height:44%"></div> 
+              
+                  <div class="histogram__chart" style="height:60%"></div>
+                  <div class="histogram__chart" style="height:70%"></div>
+                  <div class="histogram__chart" style="height:22%"></div>
+                  <div class="histogram__chart" style="height:100%"></div>
+                  <div class="histogram__chart" style="height:22%"></div>
+              
+                  <div class="histogram__chart" style="height:78%"></div>
+                  <div class="histogram__chart" style="height:60%"></div>
+                  <div class="histogram__chart" style="height:44%"></div>
+                  <div class="histogram__chart" style="height:70%"></div>
+                  <div class="histogram__chart" style="height:60%"></div>
+                </div>
+              </section>
+              <!---->
+    
+            </div>
+            <div class="card__bottom">
+              <div class="card__title">Histogram</div>
+              <div class="card__subtitle">Organism</div>
+            </div>
+          </a>
+        </section>
+        <section class="container">
+          <h3 class="element-title">Modal</h3>
+            <!---->
+            <a id="modal-open" class="button button_primary button_center" href="#modal">Open modal</a>
+            <div id="modal" class="modal">
+              <div class="modal__window">
+                <a id="modal-close" href="#" title="Close" class="modal__close">
+                  <svg class="modal__svg-icon">
+                    <use xlink:href="../src/images/sprite.svg#cross"></use>
+                  </svg>          
+                </a>
+                <div class="modal__body">
+                  <div class="modal__body-title">
+                    Modal title
+                  </div>
+                  <div class="modal__body-text">
+                    Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.<br />
+                  </div>
+                </div>
+              </div>
+            </div> 
+            <!---->
+        </section>
+        <section class="container">
+          <h3 class="element-title">Accordion</h3>
+          <div>
+            <details class="accordion vertical-item" open>
+              <summary class="accordion__summary">
+                <span class="accordion__title">Accordion item 1</span>
+                <svg class="accordion__icon" width="24" height="24">
+                  <use xlink:href="../src/images/sprite.svg#arrow-down"></use>
+                </svg>
+              </summary>
+              <p class="accordion__text">
+                Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+              </p>
+            </details>
+            
+            <details class="accordion vertical-item">
+                <summary class="accordion__summary">
+                  <span class="accordion__title">Accordion item 2</span>
+                  <svg class="accordion__icon" width="24" height="24">
+                    <use xlink:href="../src/images/sprite.svg#arrow-down"></use>
+                  </svg>
+                </summary>
+                <p class="accordion__text">
+                    Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+                </p>
+            </details>
+            
+            <details class="accordion vertical-item">
+                <summary class="accordion__summary">
+                  <span class="accordion__title">Accordion item 3</span>
+                  <svg class="accordion__icon" width="24" height="24">
+                    <use xlink:href="../src/images/sprite.svg#arrow-down"></use>
+                  </svg>
+                </summary>
+                <p class="accordion__text">
+                    Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+                </p>
+            </details>
+        </div>
+        </section>
+      </section>
+      <!-- Organisms end -->
+    </section>
+  </main>   
+  <footer class="footer container">
+    <h2 class="footer__title">About</h2>
+    <p class="footer__description">
+      This project is a collection of professionally designed, pre-built, fully responsive HTML snippets you can drop into your projects. Get started by checking out our free preview components, or browsing the PNG previews in the categories you're most curious about.
+    </p>
+  </footer>
+  <script src="../src/js/schema.js"></script>
+  <script src="../src/js/toggler.js"></script>
+  <script src="../src/js/mob-menu.js"></script>
+</body>
+</html>

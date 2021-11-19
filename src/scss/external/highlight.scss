@@ -1,0 +1,18 @@
+/* подстройка библиотеки highlight.js */
+.hljs {
+  background: var(--main-bg);
+  color: var(--grey-4);
+}
+
+pre code.hljs {
+  padding: 0;
+}
+
+.hljs-attribute,
+.hljs-doctag,
+.hljs-keyword,
+.hljs-meta .hljs-keyword,
+.hljs-name,
+.hljs-selector-tag {
+  font-weight: 400;
+}
